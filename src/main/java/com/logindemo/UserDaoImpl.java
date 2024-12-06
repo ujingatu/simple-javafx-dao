@@ -1,10 +1,15 @@
 package com.logindemo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDAO {
+    private static final Logger log = LoggerFactory.getLogger(UserDaoImpl.class);
+
     private Connection connection;
 
     public UserDaoImpl() {
@@ -21,6 +26,7 @@ public class UserDaoImpl implements UserDAO {
             stmt.setString(2, user.getEmail());
             stmt.executeUpdate();
         } catch (SQLException e) {
+            log.info("SQLException: ", e.getMessage());
             e.printStackTrace();
         }
     }
